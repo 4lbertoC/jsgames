@@ -1,0 +1,55 @@
+<html>
+<head>
+	<!-- Game created by Alberto Congiu
+		 twitter.com/4lbertoc -->
+</head>
+<body>
+<script>
+gamestrings = {
+		notenoughfood: 'There is not enough food for the mother to spawn.',
+		mothertitle: 'This is the mother of the bugs... You should get rid of it.',
+		motherspawned: 'Mother has spawned!',
+		bugtitlefield: 'This bug is in the field.',
+		bugtitlefree: 'This bug is free, kill it before it spreads!',
+		bugspreading: 'They are spreading everywhere!!!',
+		bugspawned: 'A bug has spawned!',
+		bugsinflask: 'Bugs in flask: ',
+		bugtitleinflask: 'This bug is in the flask. Excellent!',
+		uhoh: 'Uh-oh... some bugs managed to escape...',
+		notenoughbugs: ' but they are not enough, so you have lost the game :(',
+		bugsoutside: ' of them are still outside of the flask, so you have lost the game :(',
+		candobetter: '\n\n...but you can do better... don\'t you? :)',
+		normalbugs: ' are normal bugs...',
+		inhibited: ' have been inhibited...',
+		proliferated: ' have proliferated...',
+		complete: '\n\n... and we have a very interesting set of bugs, great job!'
+};
+
+var stringScramble = function(str) {
+	var n = '';
+	for(var i = 0; i < str.length; i++) {
+		if(str[i] == '\n') {
+			n += str[i];
+		}
+		else {
+			n += String.fromCharCode(str.charCodeAt(i) ^ 1);
+		}
+	}
+	return (n);
+};
+
+for(a in gamestrings)
+{
+	var originalString = gamestrings[a];
+	var newString = stringScramble(originalString).replace(/\n/g,'\\n');
+	document.body.innerText += a + ': "' + newString + '",\n';
+	
+	var reverted = stringScramble(newString.replace(/\\n/g,'\n'));
+	if(originalString != reverted)
+	{
+		document.body.innerText += "WARNING, non-scrambable string: " + reverted + '\n\n';
+	}
+}
+</script>
+</body>
+</html>
